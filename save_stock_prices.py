@@ -7,6 +7,7 @@
 
 
 import argparse
+import os
 
 import pandas as pd
 
@@ -38,6 +39,11 @@ print("[INFO] Merging all prices by index")
 df = pd.concat(dfs, axis=1, join="inner")
 df.columns = config["TICKERS"]
 print(df)
+
+# save dataframes
+csv_path = os.path.join("data", args.config + ".csv")
+df.to_csv(csv_path)
+print("[INFO] Saved information as", csv_path)
 
 # plot graphs
 if args.plot:

@@ -10,10 +10,12 @@ from datetime import datetime
 config = dict(
     {
         "TICKERS": [
-            "219480.KS",  # Kodex S&P500 Futures(H)
-            "284430.KS",  # Kodex 200 US Treasury Notes Balanced ETF Fund
+            "143850.KS",  # Tiger S&P500 Futures ETF
+            "195980.KS",  # Arirang MSCI Emerging Markets ETF
+            "148070.KS",  # KOSEF 10yr KTB
+            "153130.KS",  # KODEX KRW Cash
         ],
-        "START": datetime(2018, 1, 1),
+        "START": datetime(1900, 1, 1),
         "END": datetime.now(),
     }
 )
