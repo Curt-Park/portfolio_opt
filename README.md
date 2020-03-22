@@ -69,7 +69,7 @@ $ python scrape_prices.py --config config.py
 Sharpe ratio maximization only supported now.
 
 ```bash
-$ python optimizer --config config.py
+$ python optimizer.py --config config.py
 
 {'143850.KS': 0.32176, '195980.KS': 0.0, '148070.KS': 0.67824, '153130.KS': 0.0}
 Expected annual return: 3.9%
