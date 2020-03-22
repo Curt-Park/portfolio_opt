@@ -7,11 +7,8 @@
 
 
 import argparse
-from datetime import datetime
-import os
 
 import pandas as pd
-import plotly.graph_objs as go
 
 from utils import get_stock_prices, plot_line_graphs
 
@@ -27,14 +24,22 @@ args = parser.parse_args()
 config = getattr(__import__("config." + args.config, fromlist=[args.config]), "config")
 
 # get stock prices
-traces = []
+dfs, traces = [], []
 for ticker in config["TICKERS"]:
     print(f"[INFO] Scraping {ticker} prices...")
-    df = get_stock_prices(ticker, config["START"], config["END"])
+    df, trace = get_stock_prices(ticker, config["START"], config["END"])
     print(df)
-    traces.append(go.Scatter(x=df.index, y=df.Close, name=ticker))
+    dfs.append(df)
+    traces.append(trace)
     print(f"[INFO] Scraping {ticker} prices done.\n")
+
+# merge all dataframes
+print("[INFO] Merging all prices by index")
+df = pd.concat(dfs, axis=1, join="inner")
+df.columns = config["TICKERS"]
+print(df)
 
 # plot graphs
 if args.plot:
+    print("[INFO] Plotting all prices")
     plot_line_graphs(traces)

@@ -6,7 +6,7 @@
 """
 
 from datetime import datetime
-from typing import List
+from typing import List, Tuple
 
 import pandas as pd
 from pandas_datareader import data
@@ -14,17 +14,20 @@ import plotly.graph_objs as go
 import plotly.offline as offline
 
 
-def get_stock_prices(ticker: int, start: datetime, end: datetime) -> pd.DataFrame:
+def get_stock_prices(
+    ticker: str, start: datetime, end: datetime
+) -> Tuple[pd.DataFrame, go.Scatter]:
     """Get daily stock prices."""
-    df = data.get_data_yahoo(ticker, start=start, end=end)
+    df = data.get_data_yahoo(ticker, start=start, end=end).Close
 
     # remove incomplete rows
     df = df.dropna()
 
     # sorting
     df = df.sort_index(ascending=True)
+    trace = go.Scatter(x=df.index, y=df, name=ticker)
 
-    return df
+    return df, trace
 
 
 def plot_line_graphs(traces: List[go.Scatter]) -> None:
