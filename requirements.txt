@@ -1,0 +1,6 @@
+PyPortfolioOpt
+plotly
+
+pre-commit
+black
+isort
