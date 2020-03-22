@@ -1,5 +1,6 @@
 PyPortfolioOpt
 plotly
+sklearn
 
 pre-commit
 black
