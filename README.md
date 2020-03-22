@@ -29,7 +29,7 @@ $ make dev
 ├── config  # configurations for portfolios
 ├── data  # saved prices (csv)
 ├── optimizer.py  # portfolio optimizer
-├── save_stock_prices.py  # save stock prices as a csv file
+├── scrape_prices.py  # save stock prices as a csv file
 ├── utils.py  # util functions
 └── requirements.txt
 ```
@@ -53,6 +53,7 @@ config = dict(
         ],
         "START": datetime(1900, 1, 1),
         "END": datetime.now(),
+        "GAMMA": 0.1,  # L2 regularization weight
     }
 )
 ```
@@ -61,14 +62,14 @@ config = dict(
 
 It will create a csv file in `data/`.
 ```bash
-$ python save_stock_prices.py --config config/config.py
+$ python scrape_prices.py --config config.py
 ```
 
 ### Execute portfolio optimization
 Sharpe ratio maximization only supported now.
 
 ```bash
-$ python optimizer --path data/name.csv
+$ python optimizer --config config.py
 
 {'143850.KS': 0.32176, '195980.KS': 0.0, '148070.KS': 0.67824, '153130.KS': 0.0}
 Expected annual return: 3.9%

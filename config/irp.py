@@ -17,5 +17,6 @@ config = dict(
         ],
         "START": datetime(1900, 1, 1),
         "END": datetime.now(),
+        "GAMMA": 0.1,
     }
 )
