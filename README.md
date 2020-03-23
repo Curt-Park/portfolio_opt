@@ -28,9 +28,11 @@ $ make dev
 ├── Makefile
 ├── config  # configurations for portfolios
 ├── data  # saved prices (csv)
-├── optimizer.py  # portfolio optimizer
-├── scrape_prices.py  # save stock prices as a csv file
-├── utils.py  # util functions
+├── source  # modules
+│   ├── optimizer.py  # portfolio optimizer
+│   ├── scraper.py  # stock price getter
+│   └── utils.py  # util functions
+├── run.py
 └── requirements.txt
 ```
 
@@ -54,6 +56,10 @@ config = dict(
         "START": datetime(1900, 1, 1),
         "END": datetime.now(),
         "GAMMA": 0.1,  # L2 regularization weight
+        "PLOT": True,
+        "SAVE_WEIGHTS": True,
+        "PRICE_PATH": "data/irp.csv",
+        "WEIGHT_PATH": "data/irp_w.csv",
     }
 )
 ```
@@ -62,14 +68,14 @@ config = dict(
 
 It will create a csv file in `data/`.
 ```bash
-$ python scrape_prices.py --config config.py
+$ python run.py --module scrape --config irp
 ```
 
 ### Execute portfolio optimization
 Sharpe ratio maximization only supported now.
 
 ```bash
-$ python optimizer.py --config config.py
+$ python run.py --module optimize --config irp
 
 {'143850.KS': 0.32176, '195980.KS': 0.0, '148070.KS': 0.67824, '153130.KS': 0.0}
 Expected annual return: 3.9%

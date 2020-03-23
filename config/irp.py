@@ -18,5 +18,9 @@ config = dict(
         "START": datetime(1900, 1, 1),
         "END": datetime.now(),
         "GAMMA": 0.1,
+        "PLOT": True,
+        "SAVE_WEIGHTS": True,
+        "PRICE_PATH": "data/irp.csv",
+        "WEIGHT_PATH": "data/irp_w.csv",
     }
 )
