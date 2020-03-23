@@ -64,7 +64,7 @@ config = dict(
 )
 ```
 
-### Scraping data from yahoo finanace
+### Scrape price data from yahoo finanace
 
 It will create a csv file in `data/`.
 ```bash
